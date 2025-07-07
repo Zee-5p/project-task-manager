@@ -7,11 +7,16 @@
     <h1>Tasks for "{{ project.name }}"</h1>
     <ul>
         {% for task in tasks %}
-            <li>{{ task.title }} - {{ task.get_status_display }} - Due: {{ task.due_date }}</li>
+            <li>
+                {{ task.title }} - {{ task.get_status_display }} - Due: {{ task.due_date }}
+                  <a href="{% url 'edit_task' project.pk task.pk %}">Edit</a>
+            </li>
         {% empty %}
             <li>No tasks found for this project.</li>
         {% endfor %}
     </ul>
+
+    <a href="{% url 'add_task' project.pk %}">Add New Task</a><br>
     <a href="{% url 'project_list' %}">Back to Projects</a>
 </body>
 </html>

@@ -59,17 +59,16 @@ def add_task(request, project_pk):
     return render(request, 'dashboard/add_task.html', {'form': form, 'project': project})
 
 @login_required
-def add_task(request, project_pk):
+def edit_task(request, project_pk, task_pk):
     project = get_object_or_404(Project, pk=project_pk, created_by=request.user)
-    
+    task = get_object_or_404(Task, pk=task_pk, project=project)
+
     if request.method == 'POST':
-        form = TaskForm(request.POST)
+        form = TaskForm(request.POST, instance=task)
         if form.is_valid():
-            task = form.save(commit=False)
-            task.project = project
-            task.save()
+            form.save()
             return redirect('task_list', project_pk=project.pk)
     else:
-        form = TaskForm()
-    
-    return render(request, 'dashboard/add_task.html', {'form': form, 'project': project})
+        form = TaskForm(instance=task)
+
+    return render(request, 'dashboard/edit_task.html', {'form': form, 'project': project, 'task': task})
