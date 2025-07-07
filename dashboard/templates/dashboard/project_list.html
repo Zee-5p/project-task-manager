@@ -9,9 +9,8 @@
     <ul>
         {% for project in projects %}
             <li>
-                <strong>{{ project.name }}</strong>: {{ project.description }}<br>
+                <a href="{% url 'task_list' project.pk %}"><strong>{{ project.name }}</strong></a>: {{ project.description }}<br>
                 <a href="{% url 'edit_project' project.pk %}">Edit</a>
-
                 <a href="{% url 'delete_project' project.pk %}">Delete</a>
             </li>
         {% empty %}
