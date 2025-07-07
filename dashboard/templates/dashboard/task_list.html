@@ -10,6 +10,7 @@
             <li>
                 {{ task.title }} - {{ task.get_status_display }} - Due: {{ task.due_date }}
                   <a href="{% url 'edit_task' project.pk task.pk %}">Edit</a>
+                  <a href="{% url 'delete_task' project.pk task.pk %}">Delete</a>
             </li>
         {% empty %}
             <li>No tasks found for this project.</li>
