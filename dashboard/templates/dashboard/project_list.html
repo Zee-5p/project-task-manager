@@ -1,21 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Your Projects</title>
-</head>
-<body>
-    <h1>Your Projects</h1>
-    <ul>
-        {% for project in projects %}
-            <li>
-                <a href="{% url 'task_list' project.pk %}"><strong>{{ project.name }}</strong></a>: {{ project.description }}<br>
-                <a href="{% url 'edit_project' project.pk %}">Edit</a>
-                <a href="{% url 'delete_project' project.pk %}">Delete</a>
-            </li>
-        {% empty %}
-            <li>No projects found.</li>
-        {% endfor %}
-    </ul>
-</body>
-</html>
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Your Projects{% endblock %}
+
+{% block content %}
+<h1>Your Projects</h1>
+<ul>
+    {% for project in projects %}
+        <li>
+            <strong><a href="{% url 'task_list' project.pk %}">{{ project.name }}</a></strong>: {{ project.description }}<br>
+            <a href="{% url 'edit_project' project.pk %}">Edit</a>
+            <a href="{% url 'delete_project' project.pk %}">Delete</a>
+        </li>
+    {% empty %}
+        <li>No projects found.</li>
+    {% endfor %}
+</ul>
+{% endblock %}
