@@ -3,6 +3,7 @@ from django.contrib.auth.decorators import login_required
 from .models import Project
 from .forms import ProjectForm
 from .models import Task 
+from .forms import TaskForm
 
 @login_required
 def project_list(request):
@@ -40,3 +41,35 @@ def task_list(request, project_pk):
     project = get_object_or_404(Project, pk=project_pk, created_by=request.user)
     tasks = Task.objects.filter(project=project)
     return render(request, 'dashboard/task_list.html', {'project': project, 'tasks': tasks})
+
+@login_required
+def add_task(request, project_pk):
+    project = get_object_or_404(Project, pk=project_pk, created_by=request.user)
+
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.project = project
+            task.save()
+            return redirect('task_list', project_pk=project.pk)
+    else:
+        form = TaskForm()
+
+    return render(request, 'dashboard/add_task.html', {'form': form, 'project': project})
+
+@login_required
+def add_task(request, project_pk):
+    project = get_object_or_404(Project, pk=project_pk, created_by=request.user)
+    
+    if request.method == 'POST':
+        form = TaskForm(request.POST)
+        if form.is_valid():
+            task = form.save(commit=False)
+            task.project = project
+            task.save()
+            return redirect('task_list', project_pk=project.pk)
+    else:
+        form = TaskForm()
+    
+    return render(request, 'dashboard/add_task.html', {'form': form, 'project': project})
