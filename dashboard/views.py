@@ -72,3 +72,14 @@ def edit_task(request, project_pk, task_pk):
         form = TaskForm(instance=task)
 
     return render(request, 'dashboard/edit_task.html', {'form': form, 'project': project, 'task': task})
+
+@login_required
+def delete_task(request, project_pk, task_pk):
+    project = get_object_or_404(Project, pk=project_pk, created_by=request.user)
+    task = get_object_or_404(Task, pk=task_pk, project=project)
+
+    if request.method == 'POST':
+        task.delete()
+        return redirect('task_list', project_pk=project.pk)
+
+    return render(request, 'dashboard/confirm_delete_task.html', {'task': task, 'project': project})
