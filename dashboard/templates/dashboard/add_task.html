@@ -1,9 +1,8 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Add Task to {{ project.name }}</title>
-</head>
-<body>
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Add Task{% endblock %}
+
+{% block content %}
     <h1>Add Task to "{{ project.name }}"</h1>
 
     <form method="post">
@@ -13,5 +12,4 @@
     </form>
 
     <a href="{% url 'task_list' project.pk %}">Back to Tasks</a>
-</body>
-</html>
+{% endblock %}

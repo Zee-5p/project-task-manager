@@ -1,14 +1,14 @@
-<!DOCTYPE html>
-<html>
-<head>
-    <title>Delete Task</title>
-</head>
-<body>
-    <h1>Are you sure you want to delete the task "{{ task.title }}"?</h1>
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Delete Task{% endblock %}
+
+{% block content %}
+    <h1>Confirm Delete</h1>
+    <p>Are you sure you want to delete the task: <strong>{{ task.title }}</strong>?</p>
+
     <form method="post">
         {% csrf_token %}
         <button type="submit">Yes, delete</button>
         <a href="{% url 'task_list' project.pk %}">Cancel</a>
     </form>
-</body>
-</html>
+{% endblock %}
