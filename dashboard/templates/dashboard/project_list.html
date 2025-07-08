@@ -3,16 +3,21 @@
 {% block title %}Your Projects{% endblock %}
 
 {% block content %}
-<h1>Your Projects</h1>
-<ul>
+<h2>Your Projects</h2>
+<ul class="list-group">
     {% for project in projects %}
-        <li>
-            <strong><a href="{% url 'task_list' project.pk %}">{{ project.name }}</a></strong>: {{ project.description }}<br>
-            <a href="{% url 'edit_project' project.pk %}">Edit</a>
-            <a href="{% url 'delete_project' project.pk %}">Delete</a>
+        <li class="list-group-item d-flex justify-content-between align-items-start">
+            <div>
+                <a href="{% url 'task_list' project.pk %}"><strong>{{ project.name }}</strong></a>
+                <div class="small text-muted">{{ project.description }}</div>
+            </div>
+            <div>
+                <a href="{% url 'edit_project' project.pk %}" class="btn btn-sm btn-primary me-1">Edit</a>
+                <a href="{% url 'delete_project' project.pk %}" class="btn btn-sm btn-danger">Delete</a>
+            </div>
         </li>
     {% empty %}
-        <li>No projects found.</li>
+        <li class="list-group-item">No projects found.</li>
     {% endfor %}
 </ul>
 {% endblock %}

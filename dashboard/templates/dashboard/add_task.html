@@ -3,13 +3,11 @@
 {% block title %}Add Task{% endblock %}
 
 {% block content %}
-    <h1>Add Task to "{{ project.name }}"</h1>
-
-    <form method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Create Task</button>
-    </form>
-
-    <a href="{% url 'task_list' project.pk %}">Back to Tasks</a>
+<h2>Add Task to "{{ project.name }}"</h2>
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-success">Save Task</button>
+    <a href="{% url 'task_list' project.pk %}" class="btn btn-secondary">Cancel</a>
+</form>
 {% endblock %}
