@@ -4,6 +4,7 @@ from .models import Project
 from .forms import ProjectForm
 from .models import Task 
 from .forms import TaskForm
+from django.contrib.auth.forms import UserCreationForm
 
 @login_required
 def project_list(request):
@@ -83,3 +84,14 @@ def delete_task(request, project_pk, task_pk):
         return redirect('task_list', project_pk=project.pk)
 
     return render(request, 'dashboard/confirm_delete_task.html', {'task': task, 'project': project})
+
+def register(request):
+    if request.method == 'POST':
+        form = UserCreationForm(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login')
+    else:
+        form = UserCreationForm()
+    
+    return render(request, 'dashboard/register.html', {'form': form})
