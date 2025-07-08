@@ -1,0 +1,14 @@
+{% extends 'dashboard/base.html' %}
+
+{% block title %}Add Project{% endblock %}
+
+{% block content %}
+<h1>Add New Project</h1>
+<form method="post" class="mb-3">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Create Project</button>
+</form>
+<a href="{% url 'add_project' %}" class="btn btn-success mb-3">Add New Project</a>
+<a href="{% url 'project_list' %}" class="btn btn-secondary">Back</a>
+{% endblock %}

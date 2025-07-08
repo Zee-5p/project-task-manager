@@ -1,0 +1,16 @@
+{% extends "dashboard/base.html" %}
+
+{% block title %}Welcome{% endblock %}
+
+{% block content %}
+  <div class="text-center">
+    <h1>Welcome to Project Task Manager</h1>
+    <p class="lead">Track your projects and tasks easily.</p>
+    {% if user.is_authenticated %}
+      <a href="{% url 'project_list' %}" class="btn btn-primary">Go to Projects</a>
+    {% else %}
+      <a href="{% url 'register' %}" class="btn btn-success me-2">Register</a>
+      <a href="{% url 'login' %}" class="btn btn-outline-primary">Login</a>
+    {% endif %}
+  </div>
+{% endblock %}

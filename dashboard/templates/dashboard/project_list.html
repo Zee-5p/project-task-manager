@@ -3,17 +3,20 @@
 {% block title %}Your Projects{% endblock %}
 
 {% block content %}
-<h2>Your Projects</h2>
+<div class="d-flex justify-content-between align-items-center mb-3">
+    <h1>Your Projects</h1>
+    <a href="{% url 'add_project' %}" class="btn btn-success">Add New Project</a>
+</div>
+
 <ul class="list-group">
     {% for project in projects %}
-        <li class="list-group-item d-flex justify-content-between align-items-start">
+        <li class="list-group-item d-flex justify-content-between align-items-center">
             <div>
-                <a href="{% url 'task_list' project.pk %}"><strong>{{ project.name }}</strong></a>
-                <div class="small text-muted">{{ project.description }}</div>
+                <a href="{% url 'task_list' project.pk %}"><strong>{{ project.name }}</strong></a>: {{ project.description }}
             </div>
             <div>
-                <a href="{% url 'edit_project' project.pk %}" class="btn btn-sm btn-primary me-1">Edit</a>
-                <a href="{% url 'delete_project' project.pk %}" class="btn btn-sm btn-danger">Delete</a>
+                <a href="{% url 'edit_project' project.pk %}" class="btn btn-sm btn-outline-primary me-2">Edit</a>
+                <a href="{% url 'delete_project' project.pk %}" class="btn btn-sm btn-outline-danger">Delete</a>
             </div>
         </li>
     {% empty %}
