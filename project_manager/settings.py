@@ -11,7 +11,7 @@ SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
 ALLOWED_HOSTS = [
-    'project-task-manager.herokuapp.com',
+    'https://project-task-manager-cffc460251b6.herokuapp.com/',
     'localhost',
     '127.0.0.1'
 ]
