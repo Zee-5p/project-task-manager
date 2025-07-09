@@ -2,20 +2,21 @@ from pathlib import Path
 import os
 import dj_database_url
 
+# Base directory
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-# SECURITY WARNING: keep the secret key used in production secret!
+# Secret key & debug
 SECRET_KEY = os.environ.get('SECRET_KEY', 'dev-secret-key')
-
-# Set DEBUG via environment variable
 DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 
+# Allowed hosts
 ALLOWED_HOSTS = [
-    'https://project-task-manager-cffc460251b6.herokuapp.com/',
+    'project-task-manager-cffc460251b6.herokuapp.com',
     'localhost',
-    '127.0.0.1']
+    '127.0.0.1'
+]
 
-# Application definition
+# Installed apps
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -26,6 +27,7 @@ INSTALLED_APPS = [
     'dashboard',
 ]
 
+# Middleware
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'whitenoise.middleware.WhiteNoiseMiddleware',
@@ -37,8 +39,11 @@ MIDDLEWARE = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
+# Root URLs and WSGI
 ROOT_URLCONF = 'project_manager.urls'
+WSGI_APPLICATION = 'project_manager.wsgi.application'
 
+# Templates
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
@@ -46,6 +51,7 @@ TEMPLATES = [
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
@@ -54,14 +60,12 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'project_manager.wsgi.application'
-
 # Database configuration
 DATABASES = {
     'default': dj_database_url.config(
-        default=os.environ.get('DATABASE_URL'),
-        conn_max_age=600,
-        ssl_require=True )}
+        default=f'sqlite:///{BASE_DIR / "db.sqlite3"}'
+    )
+}
 
 # Password validation
 AUTH_PASSWORD_VALIDATORS = [
@@ -85,15 +89,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 USE_TZ = True
 
-# Static files (CSS, JavaScript, Images)
+# Static files
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [BASE_DIR / 'static']
 STATIC_ROOT = BASE_DIR / 'staticfiles'
 
-# WhiteNoise for static files
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-
-# Authentication
+# Login
 LOGIN_REDIRECT_URL = 'project_list'
 
 # Default auto field
