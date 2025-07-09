@@ -13,8 +13,7 @@ DEBUG = os.environ.get('DJANGO_DEBUG', '') != 'False'
 ALLOWED_HOSTS = [
     'https://project-task-manager-cffc460251b6.herokuapp.com/',
     'localhost',
-    '127.0.0.1'
-]
+    '127.0.0.1']
 
 # Application definition
 INSTALLED_APPS = [
