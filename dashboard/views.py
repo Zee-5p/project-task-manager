@@ -30,8 +30,7 @@ def edit_project(request, pk):
 
 @login_required
 def delete_project(request, pk):
-    project = get_object_or_404(Project, pk=pk, created_by=request.user)
-    
+    project = get_object_or_404(Project, pk=pk, created_by=request.user)    
     if request.method == 'POST':
         project.delete()
         return redirect('project_list')
